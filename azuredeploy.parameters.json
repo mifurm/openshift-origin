@@ -36,7 +36,7 @@
 			"value": "mifurm"
 		},
 		"openshiftPassword": {
-			"value": "Testtest123@@@"
+			"value": "<pass>"
 		},
 		"enableMetrics": {
 			"value": "false"
@@ -60,10 +60,10 @@
 			"value": "true"
 		},
 		"aadClientId": {
-			"value": "0a207b2f-d022-414b-9656-7bdc75ce7add"
+			"value": "<app>"
 		},
 		"aadClientSecret": {
-			"value": "08cdf00b-144f-48af-bc85-49cacb6c57fa"
+			"value": "<secret>"
 		},
 		"defaultSubDomainType": {
 			"value": "nipio"
