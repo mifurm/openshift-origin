@@ -1,0 +1,26 @@
+az account set --subscription "9d4350c8-e11c-4007-a923-c1df11a52bab"
+
+RG="okd02rg"
+
+#RG
+az group create --location westeurope --name $RG
+
+ssh-keygen -t rsa
+
+az keyvault create -n keyvaultmf02 -g $RG -l 'West Europe' --enabled-for-template-deployment true
+
+az keyvault secret set --vault-name keyvaultmf02 -n sshkeyokd02 --file id_rsa
+
+az ad sp create-for-rbac -n ocokd03 --role contributor --scopes /subscriptions/9d4350c8-e11c-4007-a923-c1df11a52bab
+
+#OUTPUT:
+# Creating a role assignment under the scope of "/subscriptions/9d4350c8-e11c-4007-a923-c1df11a52bab"
+# {
+#   "appId": "0a207b2f-d022-414b-9656-7bdc75ce7add",
+#   "displayName": "ocokd03",
+#   "name": "http://ocokd03",
+#   "password": "08cdf00b-144f-48af-bc85-49cacb6c57fa",
+#   "tenant": "3a81269f-0731-42d7-9911-a8e9202fa750"
+# }
+
+az group deployment create -n okd02 -g okdrg02 --template-file azuredeploy.json --parameters @azuredeploy.parameters.json
